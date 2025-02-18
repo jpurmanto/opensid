@@ -24,26 +24,13 @@ RUN apt install -y php8.2\
 # Install php-fpm
 RUN apt install -y php8.2-fpm php8.2-cli
 
-# Install composer
-RUN apt install -y curl
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Install nodejs
-RUN apt install -y ca-certificates gnupg
-RUN mkdir -p /etc/apt/keyrings
-RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-ENV NODE_MAJOR 20
-RUN echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list
-RUN apt update
-RUN apt install -y nodejs
-
 # Install nginx
 RUN apt install -y nginx
 RUN echo "\
     server {\n\
         listen 80;\n\
         listen [::]:80;\n\
-        root /var/www/html/public;\n\
+        root /var/www/html;\n\
         add_header X-Frame-Options \"SAMEORIGIN\";\n\
         add_header X-Content-Type-Options \"nosniff\";\n\
         index index.php;\n\
