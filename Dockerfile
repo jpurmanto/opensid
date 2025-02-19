@@ -19,6 +19,7 @@ RUN apt install -y php8.1\
     php8.1-xml\
     php8.1-bcmath\
     php8.1-pdo\
+    php8.1-tidy\
     php8.1-mysql
 
 # Install php-fpm
